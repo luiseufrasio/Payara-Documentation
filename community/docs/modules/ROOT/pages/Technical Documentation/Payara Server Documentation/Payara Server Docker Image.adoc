@@ -140,6 +140,7 @@ The following environment variables can be used to configure multiple settings o
 |`DEPLOY_PROPS`| Specifies a list of properties to be passed with the deploy commands generated in the `generate_deploy_commands.sh` script|
 |`PAYARA_ARGS`| Additional arguments passed to the `start-domain` command that starts the DAS. _Use with caution._|
 |`JVM_ARGS`| Additional JVM arguments which will be used to configure the Payara Servers DAS JVM settings|
+|`ENABLE_FILE_LOGS`| Enables writing logs to `server.log` file when set to `true`| `false`
 |===
 
 IMPORTANT: Preboot and post-boot command files will not be modified by the Docker container.
