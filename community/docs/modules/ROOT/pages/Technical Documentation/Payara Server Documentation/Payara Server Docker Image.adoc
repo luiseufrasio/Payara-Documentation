@@ -185,6 +185,34 @@ FROM payara/server-full
 COPY post-boot-commands.asadmin $POSTBOOT_COMMANDS
 ----
 
+[[logging-to-file]]
+=== Enable Logging to a File
+
+By default, Payara Server logs are written to the Docker standard output. However, you can configure the server to log to a file using the following command:
+
+[source, shell]
+
+set-log-attributes com.sun.enterprise.server.logging.GFFileHandler.logtoFile=true
+
+Then, mount the script to the expected location:
+
+[source, shell]
+
+docker run -p 8080:8080 -v /local/path/with/boot/file:/config -e PREBOOT_COMMANDS=/config/pre-boot-commands.asadmin payara/server-full
+
+Or create your own image based of the original with logs re-enabled:
+[source, Docker]
+----
+FROM payara/server-full
+COPY post-boot-commands.asadmin $PREBOOT_COMMANDS
+----
+
+Alternatively, you can redirect the container logs to a file when running the container:
+
+[source, shell]
+
+docker run -p 8080:8080 payara/server-full > payara-logs.txt 2>&1
+
 [[executing-custom-scripts-before-domain-startup]]
 === Executing Custom Scripts before Domain Startup
 
