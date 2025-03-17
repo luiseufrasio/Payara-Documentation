@@ -204,7 +204,7 @@ Or create your own image based of the original with logs re-enabled:
 [source, Docker]
 ----
 FROM payara/server-full
-COPY post-boot-commands.asadmin $PREBOOT_COMMANDS
+COPY pre-boot-commands.asadmin $PREBOOT_COMMANDS
 ----
 
 Alternatively, you can redirect the container logs to a file when running the container:
