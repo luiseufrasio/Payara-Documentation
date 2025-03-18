@@ -8,7 +8,7 @@
 
 == Improvements
 
-* [https://github.com/payara/Payara/pull/7187[FISH-9957]] Add Option to change the default context-root on Payara Micro
+* [https://github.com/payara/Payara/pull/7187[FISH-9957]] Add option to change the default context-root on Payara Micro
 
 * [https://github.com/payara/Payara/pull/7230[FISH-10526]] Improve CORBA code to prevent deadlock from pooled threads
 
