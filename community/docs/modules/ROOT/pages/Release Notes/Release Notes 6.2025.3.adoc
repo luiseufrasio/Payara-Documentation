@@ -26,12 +26,12 @@
 
 == Component Upgrades
 
-* [https://github.com/payara/Payara/pull/7189[FISH-10560]] Payara: Bump `io.projectreactor:reactor-core` from 3.7.2 to 3.7.3
+* [https://github.com/payara/Payara/pull/7189[FISH-10560]] Bump `io.projectreactor:reactor-core` from 3.7.2 to 3.7.3
 
-* [https://github.com/payara/Payara/pull/7190[FISH-10564]] Payara: Bump `net.minidev:json-smart` from 2.5.1 to 2.5.2
+* [https://github.com/payara/Payara/pull/7190[FISH-10564]] Bump `net.minidev:json-smart` from 2.5.1 to 2.5.2
 
 * [https://github.com/payara/Payara/pull/7200[FISH-10565]] Bump `net.minidev:accessors-smart` from 2.5.1 to 2.5.2
 
-* [https://github.com/payara/Payara/pull/7191[FISH-10583]] Payara: Bump `org.yaml:snakeyaml` from 2.3 to 2.4
+* [https://github.com/payara/Payara/pull/7191[FISH-10583]] Bump `org.yaml:snakeyaml` from 2.3 to 2.4
 
-* [https://github.com/payara/Payara/pull/7227[FISH-10667]] Payara: Bump `com.fasterxml.jackson:jackson-bom` from 2.18.2 to 2.18.3
+* [https://github.com/payara/Payara/pull/7227[FISH-10667]] Bump `com.fasterxml.jackson:jackson-bom` from 2.18.2 to 2.18.3
