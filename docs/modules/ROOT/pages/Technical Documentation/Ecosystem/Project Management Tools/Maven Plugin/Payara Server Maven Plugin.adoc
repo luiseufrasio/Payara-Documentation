@@ -1,0 +1,304 @@
+= Payara Server Maven Plugin
+:ordinal: 2
+
+Payara Server has a Maven plugin which can start and stop Payara Server and deploy the Jakarta EE application.
+
+The plugin requires JDK 8 or higher and the latest version is currently `1.0.0-Alpha1`
+
+[[goals]]
+== Configurable Goals
+
+[[start-goal]]
+=== `start`
+
+*Aim*: This goal starts Payara Server with the specified configuration.
+*Usage*: `mvn payara-server:start`
+
+Example:
+
+[source,xml]
+----
+<plugin>
+    <groupId>fish.payara.maven.plugins</groupId>
+    <artifactId>payara-server-maven-plugin</artifactId>
+    <version>${payara.server.maven.plugin.version}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>start</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <payaraServerVersion>{page-version}</payaraServerVersion>
+        <javaHome>/path/to/Java/Executable</javaHome>
+        <contextRoot>myApp</contextRoot>
+    </configuration>
+</plugin>
+----
+
+.Common Configuration:
+The following properties allow customization of local and remote deployments:
+[cols="2,2,2,1,7",options="header"]
+|===
+|Property Name 
+|System Property 
+|Environment Variable
+|Default Value 
+|Description
+
+|contextRoot 
+|payara.context.root
+|PAYARA_CONTEXT_PATH
+|_none_
+|Defines the context root of an application.
+
+|adminPort
+|payara.admin.port
+|PAYARA_ADMIN_PORT
+|_none_
+|Admin port for Payara server administration.
+
+|httpPort
+|payara.http.port
+|PAYARA_HTTP_PORT
+|_none_
+|HTTP port for accessing deployed applications.
+
+|httpsPort
+|payara.https.port
+|PAYARA_HTTPS_PORT
+|_none_
+|HTTPS port for accessing deployed applications securely.
+
+|protocol
+|payara.protocol
+|PAYARA_PROTOCOL
+|_none_
+|Protocol to be used for server communication (e.g., HTTP or HTTPS).
+
+|adminPassword
+|payara.admin.password
+|PAYARA_ADMIN_PASSWORD
+|_none_
+|Password for the Payara admin user.
+
+|adminPasswordFile
+|payara.admin.password.file
+|PAYARA_ADMIN_PASSWORD_FILE
+|_none_
+|Path to the file containing the Payara admin password.
+
+|adminUser
+|payara.admin.user
+|PAYARA_ADMIN_USER
+|_none_
+|Username for Payara server administration.
+
+|instanceName
+|payara.instance.name
+|PAYARA_INSTANCE
+|_none_
+|Name of the Payara server instance.
+
+|daemon
+|payara.daemon
+|PAYARA_DAEMON
+|false
+|Starts Payara Server in separate JVM process and continues with the maven build.
+
+|immediateExit
+|payara.immediate.exit
+|PAYARA_IMMEDIATE_EXIT
+|false
+|If Payara Server is executed in daemon mode, the executor thread will wait for the ready message before shutting down its process. By setting `immediateExit` to `true` you can skip this and instantly interrupt the executor thread.
+
+|autoDeploy
+|payara.auto.deploy
+|PAYARA_AUTO_DEPLOY
+|false
+|Enables automatic compilation and deployment upon saving files.
+
+|keepState
+|payara.keep.state
+|PAYARA_KEEP_STATE
+|false
+|Persists session state across multiple redeployments.
+
+|liveReload
+|payara.live.reload
+|PAYARA_LIVE_RELOAD
+|false
+|Triggers a browser refresh for an up-to-date view after each redeployment.
+
+|browser
+|payara.browser
+|PAYARA_BROWSER
+|System default browser
+|Specifies the browser used for live reload. If not explicitly set, Payara selects the best available browser based on the system: Chrome (if installed), then Firefox, followed by the system default—Edge on Windows, Safari on macOS, and Firefox on Linux.
+
+|trimLog
+|payara.trim.log
+|PAYARA_TRIM_LOG
+|false
+|Refactors log format for improved readability.
+
+|hotDeploy
+|payara.hot.deploy
+|PAYARA_HOT_DEPLOY
+|false
+|Enables the Hot Deploy mode.
+
+|webappDirectory
+|
+|
+|${project.build.directory}/${project.build.finalName}
+|The directory where the web application is built.
+
+|debug
+|payara.debug
+|PAYARA_DEBUG
+|false
+|Enables debugging mode. If true, the server waits for a debugger to attach.
+
+|debugPort
+|payara.debug.port
+|PAYARA_DEBUG_PORT
+|_none_
+|The port for remote debugging.
+
+|httpConnectionTimeout
+|payara.http.connection.timeout
+|PAYARA_HTTP_CONNECTION_TIMEOUT
+|3000
+|Socket connection timeout (in milliseconds).
+
+|httpReadTimeout
+|payara.http.read.timeout
+|PAYARA_HTTP_READ_TIMEOUT
+|3000
+|Socket read timeout (in milliseconds).
+|===
+
+.Local Configuration:
+The following properties allow customization of deployments to local instance.
+[cols="2,2,2,1,7",options="header"]
+|===
+|Property Name 
+|System Property 
+|Environment Variable
+|Default Value
+|Description
+
+|javaHome
+|payara.java.home
+|PAYARA_JAVA_HOME
+|Environment Variable `JAVA_HOME` or `JDK_HOME`
+|Absolute path to the java executable.
+
+|payaraServerVersion
+|payara.server.version
+|PAYARA_SERVER_VERSION
+|{page-version}
+|By default, start mojo fetches payara-server with version {page-version}.
+
+|payaraServerPath
+|payara.server.path
+|PAYARA_SERVER_PATH
+|_none_
+|Absolute path to the Payara server installation directory.
+
+|artifactItem
+|
+|
+|_none_
+|Defines payara-server artifact with its coordinates. Specified artifact should be available in local maven repository.
+
+|domainName
+|payara.domain.name
+|PAYARA_DOMAIN_NAME
+|`domain1`
+|Payara server domain to be used.
+
+|exploded
+|payara.exploded
+|PAYARA_EXPLODED
+|false
+|If true, deploys the application in an exploded (unpacked) format.
+
+|commandLineOptions
+|
+|
+|_none_
+|Defines a list of command line options that will be passed onto payara-server.
+
+|javaCommandLineOptions
+|
+|
+|_none_
+|Defines a list of command line options that will be passed to `java` executable. Command line options can either be defined as key-value pairs or just as list of values. key-value pairs will be formatted as `key=value`.
+|===
+
+.Remote Configuration:
+The following properties allow customization of deployments to remote instance.
+[cols="2,2,2,1,7",options="header"]
+|===
+|Property Name 
+|System Property 
+|Environment Variable
+|Default Value
+|Description
+
+|remote
+|payara.remote
+|PAYARA_REMOTE
+|false
+|If true, connects to a remote Payara server instance.
+
+|hostName
+|payara.host.name
+|PAYARA_HOST_NAME
+|_none_
+|Hostname or IP address of the Payara server.
+|===
+
+
+[[dev-goal]]
+=== `dev`
+
+*Aim*: The dev goal is designed to streamline development by enabling `exploded`, `autoDeploy`, `liveReload`, `keepState`, and `trimLog` to true, which facilitating auto compilation and deployment on saving files resulting in rapid compilation, and deployment for an efficient development workflow.
+
+*Usage*:
+[source, shell]
+----
+mvn payara-server:dev
+----
+
+The `dev` goal is an extended goal of `start` and is pre-configured for developing web applications in development mode which is equivalent to starting the Payara Server instance using the following command:
+
+[source, shell]
+----
+mvn payara-server:start -DautoDeploy=true -DliveReload=true -Dexploded=true -DkeepState -DtrimLog=true
+----
+
+[[dev-mode-features]]
+==== *Features in Dev Mode*:
+
+. *Auto Deploy*: The AutoDeploy feature enables automatic compilation and deployment of the application upon saving files within the project structure. Enabled by setting `autoDeploy=true`.
++
+The AutoDeploy feature relies on Java's WatchService to monitor changes in source directories, enabling continuous build and reload using Maven's Invoker. It dynamically modifies Maven goals based on file modifications, supports asynchronous execution for concurrent build tasks, and includes specifics for tracking changes in source, resources, and test directories.
+
+. *Live Reload*:
+The LiveReload feature automatically refreshes the browser upon redeployment.
+
+* `liveReload` Property: Enables or disables automatic browser refresh on redeployment. The `liveReload` property is set to `true` by default in the `dev` goal and `false` in the `start` goal.
+
+* `browser` Property: The `browser` property offers seamless configuration. If not specified, the system prioritizes Chrome and Firefox, gracefully falling back to Edge for Windows, Safari for macOS, or Firefox for other platforms. This improvement simplifies setup - no need to worry about specifying a browser; it adapts based on your system.
+
+* Cached Last Accessed URL: The last accessed Payara Server URL is stored in the `payara-maven-config.properties` file within the system's temporary directory. This ensures accessibility across application restarts, eliminating the need for users to manually navigate to the last accessed URL. This streamlined approach enhances the overall user experience by maintaining continuity and reducing manual intervention after each restart.
+
+. *Persistent Session State*: The `keepState` property allows for the persistence of session state across multiple re-deployments during the development process. Enabled by default in the `dev` goal and disabled in the `start` goal.
+
+. *Readable Logging*: The `trimLog` property refactors the log format for improved readability. Enabled by default in the `dev` goal and disabled in the `start` goal.
+
+NOTE: All listed features are enabled by default in the `dev` mode.
