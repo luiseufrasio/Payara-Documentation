@@ -30,7 +30,7 @@ Example:
         </execution>
     </executions>
     <configuration>
-        <payaraServerVersion>{page-version}</payaraServerVersion>
+        <payaraServerVersion>6.2025.3</payaraServerVersion>
         <javaHome>/path/to/Java/Executable</javaHome>
         <contextRoot>myApp</contextRoot>
     </configuration>
@@ -200,7 +200,7 @@ The following properties allow customization of deployments to local instance.
 |payara.server.version
 |PAYARA_SERVER_VERSION
 |`6.2025.3`
-|By default, start mojo fetches payara-server with version {page-version}.
+|By default, start mojo fetches payara-server with version `6.2025.3`.
 
 |payaraServerPath
 |payara.server.path
