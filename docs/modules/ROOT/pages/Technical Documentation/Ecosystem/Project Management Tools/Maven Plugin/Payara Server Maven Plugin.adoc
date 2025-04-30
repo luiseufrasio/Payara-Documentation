@@ -1,9 +1,9 @@
 = Payara Server Maven Plugin
 :ordinal: 2
 
-Payara Server has a Maven plugin which can start and stop Payara Server and deploy the Jakarta EE application.
+Payara Server provides a Maven plugin that can start and stop the server and deploy Jakarta EE applications.
 
-The plugin requires JDK 8 or higher and the latest version is currently `1.0.0-Alpha1`
+The plugin requires JDK 17 or higher. The latest version is currently `1.0.0-Alpha1`
 
 [[goals]]
 == Configurable Goals
@@ -266,7 +266,8 @@ The following properties allow customization of deployments to remote instance.
 [[dev-goal]]
 === `dev`
 
-*Aim*: The dev goal is designed to streamline development by enabling `exploded`, `autoDeploy`, `liveReload`, `keepState`, and `trimLog` to true, which facilitating auto compilation and deployment on saving files resulting in rapid compilation, and deployment for an efficient development workflow.
+*Aim*: The dev goal is designed to streamline development by enabling `exploded`, `autoDeploy`, `liveReload`, `keepState`, and `trimLog` to true, 
+which facilitates automatic compilation and deployment when saving files, resulting in faster iterations and a more efficient development workflow.
 
 *Usage*:
 [source, shell]
@@ -293,9 +294,9 @@ The LiveReload feature automatically refreshes the browser upon redeployment.
 
 * `liveReload` Property: Enables or disables automatic browser refresh on redeployment. The `liveReload` property is set to `true` by default in the `dev` goal and `false` in the `start` goal.
 
-* `browser` Property: The `browser` property offers seamless configuration. If not specified, the system prioritizes Chrome and Firefox, gracefully falling back to Edge for Windows, Safari for macOS, or Firefox for other platforms. This improvement simplifies setup - no need to worry about specifying a browser; it adapts based on your system.
+* `browser` Property: The `browser` property offers seamless configuration. If not specified, the system prioritizes Chrome and Firefox, gracefully falling back to Edge on Windows, Safari on macOS, or Firefox on other platforms. This improvement simplifies setup - no need to worry about specifying a browser; it adapts based on your system.
 
-* Cached Last Accessed URL: The last accessed Payara Server URL is stored in the `payara-maven-config.properties` file within the system's temporary directory. This ensures accessibility across application restarts, eliminating the need for users to manually navigate to the last accessed URL. This streamlined approach enhances the overall user experience by maintaining continuity and reducing manual intervention after each restart.
+* Cached Last Accessed URL: The last accessed Payara Server URL is stored in the `payara-maven-config.properties` file within the system's temporary directory. This ensures accessibility across application restarts, and eliminating the need for users to manually navigate back to the last accessed URL. This streamlined approach enhances the overall user experience by maintaining continuity and reducing manual intervention after each restart.
 
 . *Persistent Session State*: The `keepState` property allows for the persistence of session state across multiple re-deployments during the development process. Enabled by default in the `dev` goal and disabled in the `start` goal.
 
