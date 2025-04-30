@@ -3,7 +3,7 @@
 
 Payara Server provides a Maven plugin that can start and stop the server and deploy Jakarta EE applications.
 
-The plugin requires JDK 17 or higher. The latest version is currently `1.0.0-Alpha1`
+The plugin requires JDK 17 or higher.
 
 [[goals]]
 == Configurable Goals
@@ -199,7 +199,7 @@ The following properties allow customization of deployments to local instance.
 |payaraServerVersion
 |payara.server.version
 |PAYARA_SERVER_VERSION
-|{page-version}
+|`6.2025.3`
 |By default, start mojo fetches payara-server with version {page-version}.
 
 |payaraServerPath
