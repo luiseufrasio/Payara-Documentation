@@ -347,14 +347,14 @@ The AI Agent can be customized using the following properties:
 |Provider
 |payara.ai.provider
 |PAYARA_AI_PROVIDER
-|_none_
+|`OPEN_AI`
 |Name of the AI service provider. Supported values:
 `OPEN_AI`, `CUSTOM_OPEN_AI`, `GOOGLE`, `DEEPINFRA`, `DEEPSEEK`, `GROQ`, `MISTRAL`, `OLLAMA`, `ANTHROPIC`, `LM_STUDIO`, `GPT4ALL`.
 
 |Model
 |payara.ai.model
 |PAYARA_AI_MODEL
-|_none_
+|`gpt-4o-mini`
 |The AI model to be used (e.g., `gpt-4`, `claude-3-opus`, etc.).
 
 |Temperature
