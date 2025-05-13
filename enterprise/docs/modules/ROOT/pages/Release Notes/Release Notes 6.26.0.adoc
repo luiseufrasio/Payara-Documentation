@@ -6,6 +6,11 @@
 * Jakarta EE 10 Applications
 * MicroProfile 6.1
 
+== Improvements
+
+* [FISH-9527] Add capability to move master password file to a user defined location
+
+
 == Bug Fixes
 
 * [FISH-10713] Fix `jakarta.servlet.request.X509Certificate` request attribute yielding NULL on Payara 6.
