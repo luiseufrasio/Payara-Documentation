@@ -171,7 +171,9 @@ asadmin-options::
 
 ifeval::["{page-site-edition}" == "community"]
   `warlibs={false|true}`;;
-      If set to true, enables an application to make use of shared libraries installed to `domain_dir/lib/warlibs`. Default is `false`.
+      If set to true, enables an application to make use of shared libraries installed to `domain_dir/lib/warlibs`. Default is `false`. +
+      This feature is intended to allow a developer to create skinny WARs. +
+      This differs to common and application libraries by being cached (they don't dynamically update if the files are modified), and getting additional annotation and extension scanning & processing for CDI, EJB, Servlet, and more.
 endif::[]
 
 Other available properties are determined by the implementation of the component that is being redeployed. +
