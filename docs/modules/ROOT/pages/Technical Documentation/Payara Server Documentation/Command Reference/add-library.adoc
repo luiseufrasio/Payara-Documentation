@@ -6,6 +6,7 @@ Adds one or more library JAR files to Payara Server
 [[synopsis]]
 == Synopsis
 
+ifeval::["{page-site-edition}" == "community"]
 [source,shell]
 ----
 asadmin [asadmin-options]
@@ -15,6 +16,19 @@ add-library
 [--upload={false|true}]
 [library-file-path ...]
 ----
+endif::[]
+
+ifeval::["{page-site-edition}" == "enterprise"]
+[source,shell]
+----
+asadmin [asadmin-options]
+add-library
+[--help]
+[--type={common|ext|app}]
+[--upload={false|true}]
+[library-file-path ...]
+----
+endif::[]
 
 [[description]]
 == Description
