@@ -198,6 +198,7 @@ NOTE: If you see an access control error message when you try to use a library, 
 `server.policy` file. For more information, see xref:Technical Documentation/Application Development/Securing Applications.adoc#changing-permissions-for-an-application[Changing Permissions for an Application].
 
 ifeval::["{page-site-edition}" == "community"]
+
 [[War-libraries]]
 ==== WAR Libraries
 
@@ -205,6 +206,7 @@ Libraries stored in this directory allows a developer to create and deploy skinn
 Unlike common and application libraries (those stored in `domain_dir/lib` and `domain_dir/lib/applibs` respectively), warlibs are cached and don't dynamically update if the files within the directory are modified.
 
 These libraries are only used by applications which are deployed with the `warlibs` property set to `true`. See the xref:Technical Documentation/Command Reference/deploy.adoc#changing-permissions-for-an-application[deploy command documentation].
+
 endif::[]
 
 [[packaging-the-client-jar-for-one-application-in-another-application]]
