@@ -142,7 +142,7 @@ This command accepts the `--type` argument, which accepts the following options:
 `ext`:: The library is installed as an "extension" library into the `lib/ext` directory in the Payara Server domain
 `app`:: the library is installed as an application library into the `lib/applibs` directory in the Payara Server domain
 ifeval::["{page-site-edition}" == "community"]
-`war`:: the library is installed as a WAR library into the `lib/warlibs` direcotyr in the Payara Server domain
+`war`:: the library is installed as a WAR library into the `lib/warlibs` directory in the Payara Server domain
 endif::[]
 
 [[common-libraries]]
