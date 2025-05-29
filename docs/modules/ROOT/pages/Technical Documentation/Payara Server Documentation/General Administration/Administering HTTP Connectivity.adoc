@@ -1008,7 +1008,7 @@ This prevents malicious XSS attacks hijacking a Java session. It is enabled by d
 
 | Session Cookie Secure
 | Determines whether to add the `Secure` flag to the `JSESSIONID` cookie. In practice, this specifies that the cookie may only be transmitted using HTTPS connections.
-| `set configs.config.server-config.http-service.virtual-server.$+{virtual-server-name}+.session-cookie-secure=true/false`
+| `set configs.config.server-config.http-service.virtual-server.$+{virtual-server-name}+.session-cookie-secure=true/false/dynamic`
 
 | Network Listeners
 | Comma separated list of network listeners which applications deployed to this virtual server are available on.
@@ -1276,6 +1276,7 @@ A string value that specifies whether the `Secure` attribute is included in `JSE
 +
 * `true` — The `Secure` attribute is included.
 * `false` — The `Secure` attribute is not included.
+* `dynamic` — The `Secure` attribute setting is determined by whether the HTTP connection is secure. This is the default value.
 
 [[http-header-validation]]
 == HTTP Header Fields Validation
