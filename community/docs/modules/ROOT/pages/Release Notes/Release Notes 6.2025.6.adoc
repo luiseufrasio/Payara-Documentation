@@ -14,6 +14,8 @@
 
 * [https://github.com/payara/Payara/pull/7330[FISH-11183]] [Community Contribution - https://github.com/lprimak[lprimak]] Add JDK 24 Compatibility
 
+* [https://github.com/payara/Payara/pull/7403[FISH-11054]] Add support for MicroProfile OpenAPI 3.1 Bean Validation
+
 * [https://github.com/payara/Payara/pull/7374[FISH-11197]] [Community Contribution - https://github.com/pzygielo[pzygielo]] Align Cluster Deprecation Message With Product Versions
 
 == Bug Fixes

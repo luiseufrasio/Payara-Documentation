@@ -15,6 +15,8 @@
 
 * [FISH-9754] Diagnostic tool - IP address in the server.log
 
+* [FISH-11054] Add support for MicroProfile OpenAPI 3.1 Bean Validation
+
 * [FISH-11197] [Community Contribution - https://github.com/pzygielo[pzygielo]] Align Cluster Deprecation Message With Product Versions
 
 == Bug Fixes
