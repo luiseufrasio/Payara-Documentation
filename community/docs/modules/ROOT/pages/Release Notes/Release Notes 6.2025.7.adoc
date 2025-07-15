@@ -18,6 +18,8 @@
 
 * [https://github.com/payara/Payara/pull/7446[FISH-11208]] Fix JVM View Switching in Admin UI
 
+* [https://github.com/payara/Payara/pull/7478[FISH-11209]] Fix JS Error That Caused Existing Realms to Display Only Names and Not Properties
+
 * [https://github.com/payara/Payara/pull/7419[FISH-11423]] [Community Contribution - https://github.com/pzygielo[pzygielo]] Fix `DependOn` Typo
 
 == Component Upgrades
