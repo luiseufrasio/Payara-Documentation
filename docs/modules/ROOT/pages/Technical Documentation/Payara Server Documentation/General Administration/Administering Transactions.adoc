@@ -157,7 +157,7 @@ Default property values are shown where they exist. For `db-logging-resource` an
 
 ** The `xa-servername` property does not have a default value. Use this property to override server names that can cause errors. +
 
-** The `recover-txn-delay` default of `-1` means that recovery will be attempted upon start of the server. Use this property to delay the initial execution of the recovery thread. The units are seconds.
+** The `recover-txn-delay` default of `-1` means that recovery will be attempted upon start of the server if `automatic-recovery` is enabled. Use this property to delay the initial execution of the recovery thread. The units are seconds.
 
 You can use the xref:ROOT:Technical Documentation/Payara Server Documentation/Command Reference/get.adoc[`get`] subcommand to list all the transaction service attributes and the properties that have been set. +
 Changing `keypoint-interval`, `retry-timeout-in-seconds`, or `timeout-in-seconds` does not require a server restart. Changing other attributes or properties requires a
