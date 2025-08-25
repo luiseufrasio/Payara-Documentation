@@ -638,7 +638,7 @@ The behaviour in versions 6.2022.2 to 6.2025.9 aligned with `false`. The behavio
 Defaults to `true`.
 endif::[]
 
-//Conditional block, only rendered for the Community Edition
+//Conditional block, only rendered for the Enterprise Edition
 ifeval::["{page-site-edition}" == "enterprise"]
 `fish.payara.ready-after-applications`::
 This option determines when the server marks itself as "ready".
