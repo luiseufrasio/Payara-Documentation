@@ -36,7 +36,7 @@ asadmin [asadmin-options] deploy [--help]
 [--properties(name=value)[:name=value]*]
 [--skipdsfailure]
 ifeval::["{page-site-edition}" == "community"]
-  [--warlibs={false|true}]
+[--warlibs={false|true}]
 endif::[]
 [file_archive|filepath]
 ----
