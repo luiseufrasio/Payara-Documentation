@@ -35,7 +35,9 @@ asadmin [asadmin-options] deploy [--help]
 [--type pkg-type]
 [--properties(name=value)[:name=value]*]
 [--skipdsfailure]
-[--warlibs={false|true}]
+ifeval::["{page-site-edition}" == "community"]
+  [--warlibs={false|true}]
+endif::[]
 [file_archive|filepath]
 ----
 
