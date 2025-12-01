@@ -721,6 +721,20 @@ WARNING: The ACC does not prevent the calling application from creating or runni
 
 To run an application client, you can launch the ACC using the `appclient` script, whether Java Web Start is enabled. This script is located in the `as-install/glassfish/bin` directory.
 
+If using Java 17 or higher, you will need to configure the environment variable `VMARGS` with additional options to allow the required reflective access. An example set is as follows:
+
+[source,shell]
+----
+export VMARGS="--add-opens=java.base/java.io=ALL-UNNAMED
+--add-opens=java.base/java.lang=ALL-UNNAMED
+--add-opens=java.base/java.util=ALL-UNNAMED
+--add-opens=java.management/javax.management=ALL-UNNAMED
+--add-opens=java.management/javax.management.openmbean=ALL-UNNAMED
+"
+----
+
+NOTE: These options are the minimal set for a rudimentary client on Java 17 or 21, more advanced clients may require additional options.
+
 [[using-the-package-appclient-script]]
 === Using the `package-appclient` Script
 
