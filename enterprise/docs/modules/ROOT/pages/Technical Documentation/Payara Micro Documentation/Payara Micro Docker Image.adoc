@@ -108,22 +108,55 @@ COPY myapplication.war $DEPLOY_DIR
 [[custom-crac-image]]
 === Extend Docker Images For CRaC JDK ===
 
-The above custom image can be further extended to use a CRaC JDK.
-
-First the correct CRaC JDK for x86 Alpine Linux must be downloaded. Set the version in the Dockerfile to match the name of the tar.gz you have downloaded.
-
-In the Docker container, you can verify that the Java version in use is the correct via `java -version`.
+Below is an example of creating a custom image to use Payara Micro with a CRaC JDK.
+This dockerfile makes use of your own Payara Micro installation and will construct the checkpoint as part of the build.
+Starting the image will restore the application from the checkpoint.
 
 [source, docker, subs=attributes+]
 ----
-FROM nexus.payara.fish:5000/payara/micro:{page-version}
-ARG JDKVersion=myversion
+FROM azul/zulu-openjdk:21-jdk-crac-latest
 
-ADD $JDKVersion.tar.gz /opt
-ENV JAVA_HOME=/opt/$JDKVersion
-ENV PATH=/opt/$JDKVersion/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+USER root
 
+EXPOSE 6900/tcp
+EXPOSE 8080/tcp
+ENV LANG=en_US.UTF-8
+ENV HOME_DIR=/opt/payara
+ENV PAYARA_HOME=/opt/payara
+ENV PAYARA_DIR=/opt/payara
+ENV SCRIPT_DIR=/opt/payara
+ENV DEPLOY_DIR=/opt/payara/deployments
+ENV CHECKPOINT_DIR=/opt/payara/checkpoint
+WORKDIR /opt/payara
+
+RUN /bin/sh -c true \
+    && mkdir -p "${HOME_DIR}" \
+    && addgroup --gid 1000 payara \
+    && adduser --system --uid 1000 --no-create-home --shell /bin/bash --home "${HOME_DIR}" --gecos "" --ingroup payara payara \
+    && echo payara:payara | chpasswd \
+    && mkdir -p "${DEPLOY_DIR}" \
+    && mkdir -p "${CHECKPOINT_DIR}" \
+    && mkdir -p "${HOME_DIR}/micro" \
+    && chown -R payara:payara ${HOME_DIR} \
+    && true
+
+COPY payara-micro.jar .
 COPY myapplication.war $DEPLOY_DIR
+
+USER payara
+
+RUN java \
+    -XX:+UseContainerSupport \
+    -XX:CRaCCheckpointTo=/opt/payara/checkpoint \
+    -XX:CRaCEngine=warp \
+    -XX:CRaCEngineOptions=keep_running=false \
+    -Dfish.payara.crac.checkpointAfterDeployment=true \
+    -jar payara-micro.jar \
+    --deploy $DEPLOY_DIR/myapplication.war \
+    --rootdir /opt/payara/micro \
+    --warmup || true
+
+ENTRYPOINT ["java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=/opt/payara/checkpoint", "-jar", "payara-micro.jar"]
 ----
 
 [[deploy-from-maven-repo]]
