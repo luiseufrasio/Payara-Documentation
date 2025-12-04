@@ -106,10 +106,10 @@ COPY myapplication.war $DEPLOY_DIR
 ----
 
 [[custom-crac-image]]
-=== Extend Docker Images For CRaC JDK ===
+=== Create Docker Images For CRaC JDK ===
 
 Below is an example of creating a custom image to use Payara Micro with a CRaC JDK.
-This dockerfile makes use of your own Payara Micro installation and will construct the checkpoint as part of the build.
+This dockerfile makes use of your own Payara Micro installation and will create the checkpoint as part of the image.
 Starting the image will restore the application from the checkpoint.
 
 [source, docker, subs=attributes+]
@@ -147,16 +147,15 @@ USER payara
 
 RUN java \
     -XX:+UseContainerSupport \
-    -XX:CRaCCheckpointTo=/opt/payara/checkpoint \
+    -XX:CRaCCheckpointTo=$CHECKPOINT_DIR \
     -XX:CRaCEngine=warp \
-    -XX:CRaCEngineOptions=keep_running=false \
     -Dfish.payara.crac.checkpointAfterDeployment=true \
     -jar payara-micro.jar \
-    --deploy $DEPLOY_DIR/myapplication.war \
+    --deploymentDir $DEPLOY_DIR \
     --rootdir /opt/payara/micro \
     --warmup || true
 
-ENTRYPOINT ["java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=/opt/payara/checkpoint", "-jar", "payara-micro.jar"]
+ENTRYPOINT ["java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=$CHECKPOINT_DIR"]
 ----
 
 [[deploy-from-maven-repo]]
