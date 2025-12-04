@@ -561,6 +561,7 @@
 **** Asadmin Commands
 ***** xref:Technical Documentation/Payara Micro Documentation/Payara Micro Configuration and Management/Micro Management/Asadmin Commands/Pre and Post Boot Commands.adoc[Pre and Post Boot Commands]
 ***** xref:Technical Documentation/Payara Micro Documentation/Payara Micro Configuration and Management/Micro Management/Asadmin Commands/Send Asadmin Commands from Admin Console.adoc[Send Asadmin Commands from Admin Console]
+**** xref:Technical Documentation/Payara Micro Documentation/Payara Micro Configuration and Management/Micro Management/CRaC/CRaC Support.adoc[CRaC Support]
 *** Database Management
 **** xref:Technical Documentation/Payara Micro Documentation/Payara Micro Configuration and Management/Database Management/Log JDBC Calls.adoc[Log JDBC Calls]
 **** xref:Technical Documentation/Payara Micro Documentation/Payara Micro Configuration and Management/Database Management/SQL Trace Listeners.adoc[SQL Trace Listeners]
