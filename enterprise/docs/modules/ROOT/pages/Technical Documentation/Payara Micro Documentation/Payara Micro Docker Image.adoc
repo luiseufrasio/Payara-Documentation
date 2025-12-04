@@ -106,7 +106,7 @@ COPY myapplication.war $DEPLOY_DIR
 ----
 
 [[custom-crac-image]]
-=== Create Docker Images For CRaC JDK ===
+=== [Tech Preview] Create Docker Images For CRaC JDK ===
 
 Below is an example of creating a custom image to use Payara Micro with a CRaC JDK.
 This dockerfile makes use of your own Payara Micro installation and will create the checkpoint as part of the image.
