@@ -38,6 +38,8 @@ To restore from the generated checkpoint, invoke `java` again like so:
 
 TIP: You cannot mix-and-match CRaC engines e.g. checkpoint with 'warp' and restore with 'criu'. Ensure you use the same engine for both; the restoring Java process won't "remember" which engine you used to checkpoint.
 
+The full array of CRaC JVM options can be found in the Azul documentation: link:https://docs.azul.com/crac/usage/vm-options[CRaC JDK VM Options]
+
 [[micro-crac-checkpoint-timing]]
 === Checkpoint Timing
 
@@ -50,10 +52,11 @@ You may only create a checkpoint at one of these timings, not both.
 
 NOTE: While checkpointing after application deployment will speed up the "ready time" of the instance upon restoration, the nature and content of any deployed applications may lead to checkpoint or restoration errors.
 
+The full array of CRaC JVM options can be found in the Azul documentation: link:https://docs.azul.com/crac/usage/vm-options[CRaC JDK VM Options]
+
 [[micro-crac-docker]]
 === Docker
 
 CRaC may be utilised in Docker by creating a custom Docker image. The default Payara {pageSiteEditionCapitalised} Micro image does not utilise a CRaC JDK and so cannot be used.
 
 See xref:Technical Documentation/Payara Micro Documentation/Payara Micro Docker Image.adoc#custom-crac-image[Payara Micro Docker Image] for details.
-
