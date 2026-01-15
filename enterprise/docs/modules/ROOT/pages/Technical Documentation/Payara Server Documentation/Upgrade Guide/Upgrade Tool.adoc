@@ -209,3 +209,62 @@ exec "$JAVA" -DAS_DEBUG=true  -XX:+IgnoreUnrecognizedVMOptions -jar "$AS_INSTALL
 ----
 
 IMPORTANT: Remember to turn off these logger level settings after executing a server upgrade, as this setting will affect all future executions of any Asadmin CLI commands, which will cause them to print out more information than usual.
+
+
+[[0 Downtime upgrade]]
+== 0 Downtime upgrade
+
+IMPORTANT: This feature requires payara-upgrade-tool.jar from Payara v5.83.0 or v6.34.0 and above.
+
+Upgrading Payara requires to stop the domain and the SSH nodes. This features enables to upgrade the SSH nodes individually, to avoid having any downtime. This is only to upgrade between 2 versions of Payara 5 or 6, not from 5 to 6.
+
+[[command-options-3]]
+==== Steps to upgrade:
+stop the DAS 
+[source, shell]
+----
+asadmin> stop-domain
+----
+upgrade the domain
+[source, shell]
+----
+asadmin> upgrade-server --username example-user --distribution web --version 5.84.0 --nodes localhost-domain
+----
+Stop one SSH node to upgrade
+[source, shell]
+----
+asadmin> stop-node-ssh node1
+----
+Upgrade one SSH node
+[source, shell]
+----
+asadmin> upgrade-server --username example-user --distribution web --version 5.84.0 --nodes node1
+----
+Start the upgraded SSH node
+[source, shell]
+----
+asadmin> start-node-ssh node1
+----
+Repeat the last 3 steps with the remaining SSH nodes to upgrade.
+Start the DAS
+[source, shell]
+----
+asadmin> start-domain
+----
+
+WARNING: the upgrade can cause issues if the nodes are forming a cluster with Hazelcast. When 2 versions of Payara use different versions of Hazelnut, the upgraded node will fail to start as long as nodes using the older versions are running. If the upgraded node/DAS fails to start, you may have to upgrade everything else before restarting the nodes and the DAS. Alternatively, you can avoid these issues by disabling the data grid for every nodes.
+Below are the known combinations causing issues:
+
+[[command-options-3]]
+==== Known issues with Payara6
+
+[cols=",,,,",options="header",]
+|=======================================================================
+|Existing |Upgrade |Result
+|6.2.0 |6.4.0|[#|2025-05-23T11:29:03.431+0000|SEVERE|Payara 6.4.0|com.hazelcast.security|_ThreadID=38;_ThreadName=hz.wonderful_booth.generic-operation.thread-0;_TimeMillis=1747999743431;_LevelValue=1000;|  [192.168.122.185]:4900 [development] [5.3.1] Reason of failure for node join: Joining node's version 5.3.1 is not compatible with cluster version 5.2 (Rolling Member Upgrades are only supported in Hazelcast Enterprise)|#]
+|6.5.0|6.6.0|No Issues
+|6.6.0|6.7.0|[#|2025-05-23T12:10:17.764+0000|SEVERE|Payara 6.7.0|com.hazelcast.cluster|_ThreadID=39;_ThreadName=hz.determined_hypatia.generic-operation.thread-0;_TimeMillis=1748002217764;_LevelValue=1000;|  [192.168.122.185]:4900 [development] [5.3.1] Node could not join cluster. A Configuration mismatch was detected: Incompatible partition groups! expected: HOST_AWARE, found: SPI Node is going to shutdown now!|#]
+|6.7.0|6.14.0|No Issues
+|6.14.0|6.15.0|[2025-05-27T16:57:32.642+0000] [Payara 6.15.0] [WARNING] [AS-WEB-HA-00005] [jakarta.enterprise.web.ha] [tid: _ThreadID=102 _ThreadName=http-thread-pool::jk-connector(1)] [timeMillis: 1748365052642] [levelValue: 900] [[  Exception occurred in getSession java.io.InvalidClassException: org.apache.catalina.session.StandardSession; local class incompatible: stream classdesc serialVersionUID = 6938105823843700069, local class serialVersionUID = 5466268327832997659
+|6.15.0|6.34.0|No issues
+|=======================================================================
