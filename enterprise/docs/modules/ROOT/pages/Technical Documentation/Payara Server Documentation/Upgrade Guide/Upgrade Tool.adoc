@@ -215,7 +215,7 @@ IMPORTANT: Remember to turn off these logger level settings after executing a se
 
 IMPORTANT: This feature requires payara-upgrade-tool.jar from Payara v5.83.0 or v6.34.0 and above.
 
-Upgrading Payara requires that the domain and SSH nodes are stopped. This feature allows the upgrading of individual SSH nodes, eliminating downtime. Only upgrades in the same major version are supported 5.x to 5.x, 6.x to 6.x. Upgrades between 5.x and 6.x are not supported.
+By default, upgrading Payara requires that the domain and all SSH nodes are stopped. This feature allows the upgrading of individual SSH nodes, eliminating downtime. Only upgrades in the same major version are supported 5.x to 5.x, 6.x to 6.x. Upgrades between 5.x and 6.x are not supported.
 
 [[command-options-3]]
 ==== Steps to upgrade:
@@ -228,7 +228,7 @@ asadmin> stop-domain
 upgrade the domain
 [source, shell]
 ----
-asadmin> upgrade-server --username example-user --distribution web --version 5.84.0 --nodes localhost-domain
+asadmin> upgrade-server --username example-user --distribution web --version 6.33.0 --nodes localhost-domain
 ----
 Stop one SSH node to upgrade
 [source, shell]
@@ -238,7 +238,7 @@ asadmin> stop-node-ssh node1
 Upgrade one SSH node
 [source, shell]
 ----
-asadmin> upgrade-server --username example-user --distribution web --version 5.84.0 --nodes node1
+asadmin> upgrade-server --username example-user --distribution web --version 6.33.0 --nodes node1
 ----
 Start the upgraded SSH node
 [source, shell]
