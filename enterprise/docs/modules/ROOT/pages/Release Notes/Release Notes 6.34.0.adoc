@@ -14,6 +14,7 @@
 
 * [FISH-12434] CVE-2020-5258 Upgrade dojo.js
 * [FISH-12613] Vulnerability - Admin Account Takeover via malicious URL payload
+* [FISH-12433] CVE-2020-27511 Upgrade prototype
 
 == Bug Fixes
 
